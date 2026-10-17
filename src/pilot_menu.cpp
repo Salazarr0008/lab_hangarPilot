@@ -23,7 +23,7 @@ void print_pilots(const std::vector<Pilot>& pilots) {
     }
     for (std::size_t i = 0; i < pilots.size(); ++i) {
         std::cout << (i + 1) << ". ";
-        print_pilot(pilots[i]);
+        pilots[i].print();
     }
 }
 
@@ -67,7 +67,7 @@ void run_pilot_menu(std::vector<Pilot>& pilots) {
             Pilot recruit{name, skill, 0, 0};
             pilots.push_back(recruit);
             std::cout << "Hired: ";
-            print_pilot(pilots.back());
+            pilots.back().print();
 
         } else if (choice == 3) {
             int index = pick_pilot(pilots);
@@ -75,7 +75,7 @@ void run_pilot_menu(std::vector<Pilot>& pilots) {
                 continue;
             }
             Pilot& pilot = pilots[static_cast<std::size_t>(index)];
-            if (fly_mission(pilot)) {
+            if (pilot.fly_mission()) {
                 std::cout << pilot.name << " flew a mission. Fatigue is now "
                           << pilot.fatigue << ".\n";
             } else {
@@ -89,7 +89,7 @@ void run_pilot_menu(std::vector<Pilot>& pilots) {
                 continue;
             }
             Pilot& pilot = pilots[static_cast<std::size_t>(index)];
-            rest(pilot);
+            pilot.rest();
             std::cout << pilot.name << " rested. Fatigue is now " << pilot.fatigue << ".\n";
 
         } else if (choice == 5) {
