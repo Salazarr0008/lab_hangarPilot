@@ -64,7 +64,7 @@ void run_pilot_menu(std::vector<Pilot>& pilots) {
             if (!read_line("Name: ", name) || !read_int("Skill: ", -500, 500, skill)) {
                 return;
             }
-            Pilot recruit{name, skill, 0, 0};
+            Pilot recruit{name, skill};
             pilots.push_back(recruit);
             std::cout << "Hired: ";
             pilots.back().print();
@@ -76,11 +76,11 @@ void run_pilot_menu(std::vector<Pilot>& pilots) {
             }
             Pilot& pilot = pilots[static_cast<std::size_t>(index)];
             if (pilot.fly_mission()) {
-                std::cout << pilot.name << " flew a mission. Fatigue is now "
-                          << pilot.fatigue << ".\n";
+                std::cout << pilot.name() << " flew a mission. Fatigue is now "
+                          << pilot.fatigue() << ".\n";
             } else {
-                std::cout << pilot.name << " is too tired to fly (fatigue "
-                          << pilot.fatigue << ").\n";
+                std::cout << pilot.name() << " is too tired to fly (fatigue "
+                          << pilot.fatigue() << ").\n";
             }
 
         } else if (choice == 4) {
@@ -90,7 +90,7 @@ void run_pilot_menu(std::vector<Pilot>& pilots) {
             }
             Pilot& pilot = pilots[static_cast<std::size_t>(index)];
             pilot.rest();
-            std::cout << pilot.name << " rested. Fatigue is now " << pilot.fatigue << ".\n";
+            std::cout << pilot.name() << " rested. Fatigue is now " << pilot.fatigue() << ".\n";
 
         } else if (choice == 5) {
             int index = pick_pilot(pilots);
@@ -102,8 +102,8 @@ void run_pilot_menu(std::vector<Pilot>& pilots) {
                 return;
             }
             Pilot& pilot = pilots[static_cast<std::size_t>(index)];
-            pilot.skill += change;
-            std::cout << pilot.name << "'s skill is now " << pilot.skill << ".\n";
+            // pilot.skill += change;
+            std::cout << pilot.name() << "'s skill is now " << pilot.skill() << ".\n";
 
         } else {
             return;
