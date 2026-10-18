@@ -102,7 +102,7 @@ void run_pilot_menu(std::vector<Pilot>& pilots) {
                 return;
             }
             Pilot& pilot = pilots[static_cast<std::size_t>(index)];
-            // pilot.skill += change;
+            pilot.change_skill(change);
             std::cout << pilot.name() << "'s skill is now " << pilot.skill() << ".\n";
 
         } else {

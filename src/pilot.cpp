@@ -5,6 +5,15 @@
 
 Pilot::Pilot(std::string name, int skill)
 : name_(name), skill_(skill), fatigue_(0), missions_(0) {
+    if (name_.empty()) {
+        name_ = "Unnamed";
+    }
+    if (skill_ < 1) {
+        skill_ = 1;
+    }
+    if (skill_ > 100) {
+        skill_ = 100;
+    }
 }
 
 std::string Pilot::name() const {
@@ -21,6 +30,27 @@ int Pilot::fatigue() const {
 
 int Pilot::missions() const {
     return missions_;
+}
+
+bool Pilot::set_name(const std::string& name) {
+    if (name.empty()) {
+        return false;
+    }
+    name_ = name;
+    return true;
+}
+
+void Pilot::change_skill(int change) {
+long long new_skill = static_cast<long long>(skill_) + change;
+    if (new_skill < 1) {
+        skill_ = 1;
+    }
+    else if (new_skill > 100) {
+        skill_ = 100;
+    }
+    else {
+        skill_ = static_cast<int>(new_skill);
+    }
 }
 
 void Pilot::rest() {

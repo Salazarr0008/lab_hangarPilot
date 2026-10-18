@@ -18,6 +18,9 @@ std::string name() const;
 int skill() const;
 int fatigue() const;
 int missions() const;
+bool set_name(const std::string& name);
+
+void change_skill(int change);
 
 /// Lowers fatigue by 30. Fatigue never drops below 0.
 void rest();
